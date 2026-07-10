@@ -1,0 +1,26 @@
+# dados brutos (baixe conforme data/raw/COMO_BAIXAR.md)
+data/raw/*
+!data/raw/COMO_BAIXAR.md
+!data/raw/.gitkeep
+
+# bases processadas (regeradas pelos scripts)
+data/processed/*
+!data/processed/.gitkeep
+
+# outputs/ fica versionado de propósito: os mapas e gráficos
+# são a vitrine do projeto no GitHub
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# sistema
+.DS_Store
+Thumbs.db
