@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>João Marcus Junqueira — Analista de Dados | SQL · Power BI · Excel</title>
+<meta name="description" content="Portfólio de João Marcus Junqueira, Assistente de Dados na SuperFrete. Análises de funil, KPIs e dashboards com SQL, Power BI e Excel." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#F4F5F2;
+    --card:#FFFFFF;
+    --ink:#171B1D;
+    --muted:#5D6660;
+    --line:#171B1D;
+    --green:#0C7C46;
+    --green-soft:#E3F1E8;
+    --amber:#8A6116;
+    --amber-soft:#F5ECD8;
+    --gray-soft:#ECEDEA;
+    --red:#C23B2A;
+    --radius:10px;
+    --font-display:'Archivo Black','Arial Black',system-ui,sans-serif;
+    --font-body:'Archivo',system-ui,-apple-system,sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1 !important;transform:none !important;transition:none !important}
+  }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:4px}
+  .container{max-width:1060px;margin:0 auto;padding:0 24px}
+  .mono{font-family:var(--font-mono)}
+
+  /* ---------- top strip ---------- */
+  .topbar{border-bottom:2px solid var(--line);background:var(--paper);position:sticky;top:0;z-index:50}
+  .topbar-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 0;flex-wrap:wrap}
+  .topbar .code{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .topnav{display:flex;gap:20px;flex-wrap:wrap}
+  .topnav a{font-family:var(--font-mono);font-size:13px;text-transform:uppercase;letter-spacing:.06em;text-decoration:none;border-bottom:2px solid transparent;padding-bottom:2px}
+  .topnav a:hover{border-bottom-color:var(--green);color:var(--green)}
+
+  /* ---------- hero label ---------- */
+  .hero{padding:56px 0 40px}
+  .label-card{
+    background:var(--card);
+    border:3px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:8px 8px 0 rgba(23,27,29,.9);
+    overflow:hidden;
+  }
+  .label-top{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:14px 28px;border-bottom:2px dashed var(--line);flex-wrap:wrap;
+  }
+  .label-top .tag{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .barcode-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+  .barcode{
+    width:150px;height:40px;
+    background:repeating-linear-gradient(90deg,
+      var(--ink) 0 3px, transparent 3px 5px,
+      var(--ink) 5px 6px, transparent 6px 11px,
+      var(--ink) 11px 15px, transparent 15px 17px,
+      var(--ink) 17px 18px, transparent 18px 22px);
+  }
+  .barcode-wrap .num{font-family:var(--font-mono);font-size:11px;letter-spacing:.25em}
+  .label-main{padding:36px 28px 30px}
+  .eyebrow{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:10px}
+  h1{
+    font-family:var(--font-display);
+    font-size:clamp(2.1rem,6vw,3.9rem);
+    line-height:1.02;
+    letter-spacing:-.01em;
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .hero-sub{font-size:clamp(1.02rem,2.2vw,1.22rem);max-width:56ch;color:var(--ink)}
+  .hero-sub strong{color:var(--green)}
+  .declared{margin-top:26px;padding-top:22px;border-top:2px dashed var(--line)}
+  .declared .tag{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:12px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{
+    font-family:var(--font-mono);font-size:12.5px;font-weight:500;
+    border:2px solid var(--line);border-radius:999px;
+    padding:6px 14px;background:var(--paper);white-space:nowrap;
+  }
+  .label-foot{
+    display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+    padding:20px 28px;border-top:2px solid var(--line);background:var(--gray-soft);
+  }
+  .ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{
+    font-family:var(--font-mono);font-size:13.5px;font-weight:600;letter-spacing:.03em;
+    text-decoration:none;text-transform:uppercase;
+    padding:12px 20px;border:2px solid var(--line);border-radius:8px;
+    transition:transform .12s ease, box-shadow .12s ease;display:inline-block;background:var(--card)
+  }
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+  .btn-solid{background:var(--ink);color:var(--paper)}
+  .stamp{
+    font-family:var(--font-mono);font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--red);border:3px solid var(--red);border-radius:8px;
+    padding:10px 16px;transform:rotate(-4deg);
+  }
+  .hero-note{margin-top:16px;font-family:var(--font-mono);font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+
+  /* ---------- sections ---------- */
+  .section{padding:64px 0 12px}
+  .section-head{margin-bottom:32px}
+  h2{font-family:var(--font-display);font-size:clamp(1.5rem,3.4vw,2.2rem);text-transform:uppercase;letter-spacing:.01em;margin:6px 0 10px}
+  .section-desc{color:var(--muted);max-width:62ch}
+
+  /* ---------- projects ---------- */
+  .project{
+    background:var(--card);border:2px solid var(--line);border-radius:var(--radius);
+    padding:26px 28px;margin-bottom:20px;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .project:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 rgba(23,27,29,.85)}
+  .project-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+  .p-code{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;color:var(--muted)}
+  .status{
+    font-family:var(--font-mono);font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    padding:5px 12px;border-radius:999px;border:2px solid;
+  }
+  .st-done{color:var(--green);border-color:var(--green);background:var(--green-soft)}
+  .st-transit{color:var(--amber);border-color:var(--amber);background:var(--amber-soft)}
+  .st-proc{color:var(--muted);border-color:var(--muted);background:var(--gray-soft)}
+  h3{font-family:var(--font-body);font-weight:700;font-size:1.25rem;line-height:1.3;margin-bottom:10px}
+  .project p{max-width:72ch}
+  .stack{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .stack span{font-family:var(--font-mono);font-size:11.5px;font-weight:500;letter-spacing:.05em;border:1.5px solid var(--muted);color:var(--muted);border-radius:6px;padding:4px 10px}
+  .p-foot{margin-top:16px;padding-top:14px;border-top:1.5px dashed var(--muted);font-size:.95rem}
+  .p-foot a{font-weight:600;color:var(--green);text-decoration:none;border-bottom:2px solid var(--green)}
+  .p-foot a:hover{opacity:.75}
+  .p-foot .locked{font-family:var(--font-mono);font-size:12.5px;color:var(--muted)}
+  .project.featured{border-width:3px;box-shadow:6px 6px 0 rgba(12,124,70,.28)}
+
+  /* ---------- timeline ---------- */
+  .timeline{list-style:none;position:relative;padding-left:26px}
+  .timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .tl-item{position:relative;padding:0 0 30px 18px}
+  .tl-item::before{
+    content:"";position:absolute;left:-26px;top:7px;width:14px;height:14px;border-radius:50%;
+    background:var(--paper);border:3px solid var(--line);
+  }
+  .tl-item.current::before{background:var(--green);border-color:var(--green)}
+  .tl-item.next::before{background:var(--paper);border-style:dashed;border-color:var(--green)}
+  .tl-date{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
+  .tl-title{font-weight:700;font-size:1.06rem}
+  .tl-title .org{font-weight:500;color:var(--muted)}
+  .tl-desc{color:var(--ink);font-size:.98rem;max-width:64ch;margin-top:3px}
+  .tl-item.next .tl-title{color:var(--green)}
+
+  /* ---------- skills ---------- */
+  .skills{border-top:2px solid var(--line)}
+  .skill-row{display:grid;grid-template-columns:230px 1fr;gap:10px 28px;padding:18px 0;border-bottom:2px solid var(--line)}
+  .skill-row dt{font-family:var(--font-mono);font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding-top:3px}
+  .skill-row dd{color:var(--ink)}
+  @media (max-width:640px){.skill-row{grid-template-columns:1fr;gap:4px}}
+
+  /* ---------- education ---------- */
+  .edu{background:var(--card);border:2px solid var(--line);border-radius:var(--radius);padding:22px 26px;max-width:640px}
+  .edu .tl-date{margin-bottom:2px}
+
+  /* ---------- contact ---------- */
+  .contact{padding:72px 0 40px}
+  .contact-card{border-top:3px solid var(--line);padding-top:40px}
+  .big-mail{
+    font-family:var(--font-display);
+    font-size:clamp(1.15rem,4.6vw,2.6rem);
+    text-transform:lowercase;letter-spacing:-.01em;
+    text-decoration:none;border-bottom:4px solid var(--green);
+    word-break:break-all;display:inline-block;margin:14px 0 26px;
+  }
+  .big-mail:hover{color:var(--green)}
+  .contact-links{display:flex;gap:12px;flex-wrap:wrap}
+  footer{padding:36px 0 44px}
+  .foot-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:2px dashed var(--muted);padding-top:20px}
+  .foot-inner p{font-family:var(--font-mono);font-size:12px;color:var(--muted);letter-spacing:.05em}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container topbar-inner">
+    <span class="code">JMJ · LAVRAS/MG · BR &nbsp;→&nbsp; DESTINO: SEU TIME DE DADOS</span>
+    <nav class="topnav" aria-label="Navegação principal">
+      <a href="#projetos">Projetos</a>
+      <a href="#trajetoria">Trajetória</a>
+      <a href="#competencias">Competências</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="container">
+    <div class="label-card">
+      <div class="label-top">
+        <span class="tag">Etiqueta de apresentação · frete grátis para recrutadores</span>
+        <div class="barcode-wrap" aria-hidden="true">
+          <div class="barcode"></div>
+          <span class="num">JMJ 0331 2026 BR</span>
+        </div>
+      </div>
+      <div class="label-main">
+        <p class="eyebrow">Remetente</p>
+        <h1>João Marcus<br />Junqueira</h1>
+        <p class="hero-sub">
+          Assistente de Dados na <strong>SuperFrete</strong>, em rota para <strong>Analista de Dados Júnior</strong>.
+          Transformo dados de logística e e-commerce em decisões de negócio: funil de conversão,
+          KPIs, segmentação de clientes e dashboards que as áreas realmente usam.
+        </p>
+        <div class="declared">
+          <span class="tag">Conteúdo declarado</span>
+          <div class="chips">
+            <span class="chip">SQL</span>
+            <span class="chip">Power BI · DAX</span>
+            <span class="chip">Excel avançado</span>
+            <span class="chip">R</span>
+            <span class="chip">Python</span>
+            <span class="chip">Análise de clusters</span>
+            <span class="chip">EDA</span>
+            <span class="chip">Data cleaning</span>
+            <span class="chip">KPIs &amp; funil</span>
+            <span class="chip">Storytelling com dados</span>
+          </div>
+        </div>
+      </div>
+      <div class="label-foot">
+        <div class="ctas">
+          <a class="btn btn-solid" href="#projetos">Ver projetos</a>
+          <a class="btn" href="https://www.linkedin.com/in/joaomarcusjunqueira" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/joaomarcusjunqueira" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="mailto:joaomarcus2012@gmail.com">E-mail</a>
+        </div>
+        <span class="stamp">Disponível p/ vagas Jr</span>
+      </div>
+    </div>
+    <p class="hero-note">// entrega em todo o Brasil — remoto, híbrido ou presencial (Lavras/MG)</p>
+  </div>
+</header>
+
+<main>
+  <section class="section" id="projetos">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Rastreio de projetos</p>
+        <h2>Projetos</h2>
+        <p class="section-desc">
+          Cada projeto sai com código de rastreio: repositório público, README com as decisões
+          de análise e resultado documentado. Status atualizado conforme a entrega avança.
+        </p>
+      </div>
+
+      <article class="project featured reveal">
+        <div class="project-top">
+          <span class="p-code">SF-FUNIL-700K</span>
+          <span class="status st-done">Entregue</span>
+        </div>
+        <h3>Conversão do funil cotação → postagem em base de 700 mil+ usuários</h3>
+        <p>
+          Case profissional na SuperFrete: análise ponta a ponta de um segmento de usuários fora do perfil ideal,
+          da limpeza da base (incluindo identificação e remoção de bots e correção de problemas de formatação numérica)
+          à segmentação por região do CEP, efeito de preço e distância da rota, e latência entre a primeira cotação
+          e a primeira postagem. O resultado foi um diagnóstico acionável de onde o funil converte, onde trava e por quê,
+          usado como apoio à decisão pelas áreas de negócio.
+        </p>
+        <div class="stack">
+          <span>SQL</span><span>R</span><span>Excel</span><span>Análise de funil</span><span>Data quality</span>
+        </div>
+        <p class="p-foot"><span class="locked">// dados internos e confidenciais — método e resultados detalhados em entrevista</span></p>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-top">
+          <span class="p-code">UFLA-TCC-0002</span>
+          <span class="status st-transit">Em trânsito</span>
+        </div>
+        <h3>Alocação de recursos públicos nos municípios mineiros: análise por função de governo — TCC (UFLA)</h3>
+        <p>
+          Pesquisa descritiva e quantitativa sobre como os 853 municípios de Minas Gerais distribuem a
+          despesa liquidada per capita entre as funções de governo (FINBRA/Siconfi, exercícios de 2023 a
+          2025 analisados separadamente). Além da estatística descritiva, aplica análise de agrupamentos
+          em duas etapas — método hierárquico de Ward e refinamento por K-means, com validação por
+          silhueta média — para identificar perfis de alocação, com mapas sobre a malha municipal do IBGE.
+          Execução em Python: pandas, NumPy, SciPy e scikit-learn.
+        </p>
+        <div class="stack">
+          <span>Python</span><span>scikit-learn</span><span>Clusters · Ward + K-means</span><span>Estatística descritiva</span><span>FINBRA/Siconfi</span>
+        </div>
+        <p class="p-foot"><a href="https://github.com/joaomarcusjunqueira/tcc-gastos-publicos-mg" target="_blank" rel="noopener">Acompanhar no GitHub →</a></p>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-top">
+          <span class="p-code">BR-OLIST-0003</span>
+          <span class="status st-proc">Processando</span>
+        </div>
+        <h3>Frete e entregas no e-commerce brasileiro — dataset público Olist</h3>
+        <p>
+          Análise de ~100 mil pedidos reais de e-commerce (dados públicos): custo de frete por estado e região,
+          prazo prometido vs. prazo realizado, e o impacto do atraso na avaliação do cliente.
+          Exploração em SQL e painel final em Power BI.
+        </p>
+        <div class="stack">
+          <span>SQL</span><span>Power BI</span><span>Dados públicos</span>
+        </div>
+        <p class="p-foot"><a href="https://github.com/joaomarcusjunqueira" target="_blank" rel="noopener">Acompanhar no GitHub →</a></p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="trajetoria">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Histórico de movimentações</p>
+        <h2>Trajetória</h2>
+        <p class="section-desc">Do atendimento ao cliente à análise de dados — cada etapa somou leitura de negócio à leitura técnica.</p>
+      </div>
+      <ul class="timeline reveal">
+        <li class="tl-item next">
+          <span class="tl-date">Próximo destino</span>
+          <p class="tl-title">Analista de Dados Júnior <span class="org">· em rota</span></p>
+          <p class="tl-desc">BI, indicadores e análise de dados aplicada a negócios.</p>
+        </li>
+        <li class="tl-item current">
+          <span class="tl-date">out/2025 — atual</span>
+          <p class="tl-title">Assistente de Dados <span class="org">· SuperFrete</span></p>
+          <p class="tl-desc">Dashboards em Power BI, tratamento e validação de bases, análises exploratórias, KPIs e análises executivas para as áreas comercial e de operações.</p>
+        </li>
+        <li class="tl-item">
+          <span class="tl-date">out/2023 — set/2025</span>
+          <p class="tl-title">Vendas Internas <span class="org">· SuperFrete</span></p>
+          <p class="tl-desc">CRM, análise de funil de vendas, segmentação de leads e métricas de prospecção, qualificação e conversão.</p>
+        </li>
+        <li class="tl-item">
+          <span class="tl-date">abr/2023 — out/2023</span>
+          <p class="tl-title">SDR — Desenvolvimento de Vendas <span class="org">· LC Engenharia e Energia Solar</span></p>
+          <p class="tl-desc">Pipeline B2B no HubSpot, segmentação de leads e priorização de contatos.</p>
+        </li>
+        <li class="tl-item">
+          <span class="tl-date">mai/2021 — nov/2022</span>
+          <p class="tl-title">Assistente Comercial <span class="org">· Bodipasa</span></p>
+          <p class="tl-desc">Organização de dados comerciais e apoio a orçamentos e propostas B2B.</p>
+        </li>
+        <li class="tl-item">
+          <span class="tl-date">2015 — 2021</span>
+          <p class="tl-title">Vendas e atendimento <span class="org">· Fast Shop e AeC</span></p>
+          <p class="tl-desc">Origem da rota: vendas consultivas, metas e relacionamento com clientes.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="competencias">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Declaração de conteúdo</p>
+        <h2>Competências</h2>
+      </div>
+      <dl class="skills reveal">
+        <div class="skill-row">
+          <dt>Ferramentas</dt>
+          <dd>SQL · Power BI (DAX, dashboards, relatórios) · Excel avançado (tabelas dinâmicas, PROCV/XLOOKUP) · R (RStudio) · Python (pandas, NumPy, SciPy, scikit-learn)</dd>
+        </div>
+        <div class="skill-row">
+          <dt>Análise de dados</dt>
+          <dd>Análise exploratória (EDA) · tratamento, limpeza e validação de dados · qualidade de dados · KPIs e indicadores · funil de conversão · segmentação e comportamento de usuários · análise de agrupamentos (Ward e K-means)</dd>
+        </div>
+        <div class="skill-row">
+          <dt>BI &amp; visualização</dt>
+          <dd>Construção de dashboards · relatórios gerenciais · storytelling com dados · apresentações executivas</dd>
+        </div>
+        <div class="skill-row">
+          <dt>CRM &amp; negócio</dt>
+          <dd>HubSpot · pipeline e funil comercial · prospecção e qualificação de leads · métricas de conversão</dd>
+        </div>
+      </dl>
+      <div style="margin-top:28px" class="reveal">
+        <div class="edu">
+          <span class="tl-date">Formação · mar/2023 — 2027 (previsão)</span>
+          <p class="tl-title">Bacharelado em Administração Pública <span class="org">· Universidade Federal de Lavras (UFLA)</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contato">
+    <div class="container contact-card reveal">
+      <p class="eyebrow">Endereço de entrega</p>
+      <h2>Vamos conversar?</h2>
+      <p class="section-desc">Aberto a oportunidades de Analista de Dados Júnior e conversas sobre dados, BI e logística.</p>
+      <a class="big-mail" href="mailto:joaomarcus2012@gmail.com">joaomarcus2012@gmail.com</a>
+      <div class="contact-links">
+        <a class="btn" href="https://www.linkedin.com/in/joaomarcusjunqueira" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/joaomarcusjunqueira" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="tel:+5531982468398">(31) 98246-8398</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container foot-inner">
+    <p>© 2026 João Marcus Junqueira · Lavras/MG</p>
+    <p>HTML puro — leve como um envelope</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal (respeita prefers-reduced-motion via CSS)
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>
